@@ -1,31 +1,37 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class SwingHammer : MonoBehaviour
 {
     [Header("Swing Settings")]
-    public float maxAngle = 45f;    // ¾ç ³¡ °¢µµ (+/-)
-    public float swingSpeed = 1.5f; // ¿Õº¹ ¼Óµµ
+    public float maxAngle = 45f;    // ì–‘ ë ê°ë„ (+/-)
+    public float swingSpeed = 1.5f; // ì™•ë³µ ì†ë„
+
+    [Tooltip("Hammer Rotation(ë‹¨ìœ„: ë¼ë””ì•ˆ)")]
+    public float phaseOffset = 0f;
 
     [Header("Knockback Settings")]
-    public float horizontalStrength = 25f; // XZ ¹æÇâ Èû
-    public float verticalStrength = 3f;    // À§·Î Æ¢±â´Â Èû
+    public float horizontalStrength = 30f; // XZ ë°©í–¥ í˜
+
 
     private Quaternion _startLocalRotation;
 
     private void Start()
     {
-        // ½ÃÀÛ È¸Àü°ª ÀúÀå (±âº» °¢µµ ±âÁØÀ¸·Î ÁÂ¿ì ¿òÁ÷ÀÌ°Ô)
+        // ì‹œì‘ íšŒì „ê°’ ì €ì¥ (ê¸°ë³¸ ê°ë„ ê¸°ì¤€ìœ¼ë¡œ ì¢Œìš° ì›€ì§ì´ê²Œ)
         _startLocalRotation = transform.localRotation;
     }
 
     private void Update()
     {
-        // -maxAngle ~ +maxAngle »çÀÌ ¿Õº¹
-        float angle = Mathf.Sin(Time.time * swingSpeed) * maxAngle;
+        // ì‹œê°„ * ì†ë„ + í•´ë¨¸ë³„ ìœ„ìƒ ì˜¤í”„ì…‹
+        float t = Time.time * swingSpeed + phaseOffset;
 
-        // ZÃà ±âÁØ È¸Àü (ÃßÃ³·³)
+        // -maxAngle ~ +maxAngle ì‚¬ì´ ì™•ë³µ
+        float angle = Mathf.Sin(t) * maxAngle;
+
         transform.localRotation = _startLocalRotation * Quaternion.Euler(0f, 0f, angle);
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -34,23 +40,23 @@ public class SwingHammer : MonoBehaviour
         Rigidbody playerRb = collision.rigidbody;
         if (playerRb == null) return;
 
-        // Hammer Áß½É ¡æ ÇÃ·¹ÀÌ¾î ¹æÇâ (¼öÆò)
+        // Hammer ì¤‘ì‹¬ â†’ í”Œë ˆì´ì–´ ë°©í–¥ (ìˆ˜í‰)
         Vector3 dir = collision.transform.position - transform.position;
         dir.y = 0f;
         if (dir.sqrMagnitude < 0.001f)
         {
-            // È¤½Ã °ÅÀÇ °°Àº À§Ä¡¶ó¸é ¸ÁÄ¡°¡ ÇâÇÑ ÂÊÀ¸·Î
+            // ê±°ì˜ ê°™ì€ ìœ„ì¹˜ë©´, ë§ì¹˜ê°€ íœ˜ë‘ë¥´ëŠ” ì˜¤ë¥¸ìª½ ë°©í–¥ìœ¼ë¡œ
             dir = transform.right;
         }
         dir.Normalize();
 
-        // ±âÁ¸ ¼Óµµ ¸®¼Â
+        // ê¸°ì¡´ ì†ë„ ë‚ ë¦¬ê³ 
         playerRb.velocity = Vector3.zero;
         playerRb.angularVelocity = Vector3.zero;
 
-        // ¼öÆò + ¼öÁ÷ ³Ë¹é ºĞ¸®
-        Vector3 knockback = dir * horizontalStrength;     // XZ·Î ¸Ö¸® ¹Ğ¾î³»±â
-        knockback += Vector3.up * verticalStrength;       // »ìÂ¦ À§·Î¸¸
+        // ğŸ‘‡ ì™„ì „ ìˆ˜í‰ ë„‰ë°±ë§Œ ì¤€ë‹¤ (y ì„±ë¶„ 0 ë³´ì¥)
+        Vector3 knockback = dir * horizontalStrength;
+        knockback.y = 0f;
 
         playerRb.AddForce(knockback, ForceMode.VelocityChange);
     }
