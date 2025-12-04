@@ -217,33 +217,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1979449810057982274, guid: f184ba4911fbaaa4195a4f967a69e3bf, type: 3}
---- !u!1 &99860654 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 724829039857940466, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
-  m_PrefabInstance: {fileID: 4441083572545051672}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &99860658
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 99860654}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 491143407260242397, guid: f184ba4911fbaaa4195a4f967a69e3bf, type: 3}
 --- !u!1 &138716248
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +262,72 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -64.82423, y: 9.800488, z: -7.403937}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &150121385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 150121388}
+  - component: {fileID: 150121387}
+  - component: {fileID: 150121386}
+  m_Layer: 0
+  m_Name: RollingLogKillZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &150121386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150121385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d0d60f371890f49b80809a2127ed7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &150121387
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150121385}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.79, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &150121388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150121385}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -31.58, y: 3.88, z: 8.96}
+  m_LocalScale: {x: 0.64, y: 2.06, z: 4.48}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1844,6 +1883,53 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7641865363630646605, guid: f184ba4911fbaaa4195a4f967a69e3bf, type: 3}
+--- !u!1 &1261829335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1261829337}
+  - component: {fileID: 1261829336}
+  m_Layer: 0
+  m_Name: RollingLogSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1261829336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261829335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89cab5cd313ceaa4f8f4f0aafff0130c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logPrefab: {fileID: 302376432066230411, guid: b28d3f33bcb5b654faab0ed76286bad5, type: 3}
+  spawnInterval: 1.5
+  maxLogs: 3
+--- !u!4 &1261829337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261829335}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40.52, y: 11.32, z: 9.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1263811082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2750,9 +2836,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikePlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 724829039857940466, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
+      propertyPath: m_Name
+      value: RollingLog
+      objectReference: {fileID: 0}
     - target: {fileID: 854986228743843633, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
       propertyPath: m_Name
       value: RotatingBlade
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392057617096804713, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2493936680211662402, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2850,6 +2944,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 3578208212650207311, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
     - {fileID: 6415785574119192668, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
+    - {fileID: 1872599899038431616, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7935407895617843011, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
@@ -2930,9 +3025,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7537065776739596085, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 743321462}
-    - targetCorrespondingSourceObject: {fileID: 724829039857940466, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 99860658}
     - targetCorrespondingSourceObject: {fileID: 207020326503939578, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 667392004}
@@ -3013,3 +3105,5 @@ SceneRoots:
   - {fileID: 523610989}
   - {fileID: 138716250}
   - {fileID: 2069810817}
+  - {fileID: 1261829337}
+  - {fileID: 150121388}
