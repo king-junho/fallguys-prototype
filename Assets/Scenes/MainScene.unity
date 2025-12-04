@@ -149,6 +149,47 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2928966540353291585, guid: f184ba4911fbaaa4195a4f967a69e3bf, type: 3}
+--- !u!1 &43368924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5840160409844925256, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
+  m_PrefabInstance: {fileID: 4441083572545051672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &43368928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43368924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ecc3cc7492c254a9836fa83939ad8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 200
+  knockbackForce: 30
+  knockupForce: 15
+--- !u!65 &43368929
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43368924}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.4448266, y: 0.22537549, z: 0.63699985}
+  m_Center: {x: 0.95828295, y: 0, z: -0.013031453}
 --- !u!1 &84413067 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6307799036703383740, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
@@ -2709,6 +2750,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikePlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 854986228743843633, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
+      propertyPath: m_Name
+      value: RotatingBlade
+      objectReference: {fileID: 0}
     - target: {fileID: 2493936680211662402, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.5
@@ -2728,6 +2773,14 @@ PrefabInstance:
     - target: {fileID: 5262049564986063387, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
       propertyPath: m_Name
       value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 5840160409844925256, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
+      propertyPath: m_Name
+      value: 'BladeArm '
+      objectReference: {fileID: 0}
+    - target: {fileID: 5840160409844925256, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6415785574119192668, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
       propertyPath: m_Name
@@ -2862,6 +2915,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 854986228743843633, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 415610156}
+    - targetCorrespondingSourceObject: {fileID: 5840160409844925256, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 43368929}
+    - targetCorrespondingSourceObject: {fileID: 5840160409844925256, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 43368928}
     - targetCorrespondingSourceObject: {fileID: 665770757448859385, guid: 4c1e9b8c73032144b8995ed84ea898d7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 414478289}
