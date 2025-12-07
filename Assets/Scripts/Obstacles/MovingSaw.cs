@@ -31,33 +31,13 @@ public class MovingSaw : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        // Player 태그 체크 대신, PlayerController 있는지로 체크하는 게 더 안전
+        var player = other.GetComponent<PlayerController>()
+                     ?? other.GetComponentInParent<PlayerController>();
 
-        // 1) PlayerController가 Respawn 메서드를 가지고 있다면 그걸 먼저 시도
-        var controller = other.GetComponentInParent<PlayerController>();
-        if (controller != null && respawnPoint == null)
+        if (player != null)
         {
-            // PlayerController 안에서 자체적으로 시작 위치를 관리하는 버전이면
-            // Respawn() 만 호출해도 됨 (원래 스크립트에 따라 다름)
-            // 여기선 예시로만 놔두고, respawnPoint를 쓰는 쪽을 기본으로 둘게.
-        }
-
-        // 2) respawnPoint로 순간 이동
-        if (respawnPoint != null)
-        {
-            Rigidbody playerRb = other.attachedRigidbody;
-            if (playerRb != null)
-            {
-                playerRb.velocity = Vector3.zero;  // 속도 리셋
-                playerRb.angularVelocity = Vector3.zero;
-            }
-
-            Transform playerTr = other.transform;
-            playerTr.position = respawnPoint.position;
-        }
-        else
-        {
-            Debug.LogWarning("MovingSaw: respawnPoint가 설정되어 있지 않습니다.");
+            player.Respawn();
         }
     }
 }
