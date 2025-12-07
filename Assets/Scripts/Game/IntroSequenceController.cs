@@ -21,7 +21,9 @@ public class IntroSequenceController : MonoBehaviour
     [Header("Audio (선택 사항, 나중에 써도 됨)")]
     public AudioSource sfxSource;            // 비프/스타트 효과음용
     public AudioSource bgmSource;            // 게임 BGM
-    public AudioClip beepClip;               // 3,2,1
+    public AudioClip beepClip1;
+    public AudioClip beepClip2;
+    public AudioClip beepClip3;
     public AudioClip startClip;              // START!!
 
     private void Start()
@@ -127,34 +129,24 @@ public class IntroSequenceController : MonoBehaviour
         if (countdownText != null)
             countdownText.gameObject.SetActive(true);
 
-        yield return ShowStep("3", false);
-        yield return ShowStep("2", false);
-        yield return ShowStep("1", false);
-        yield return ShowStep("START!!", true);
+        yield return ShowStep("3", beepClip3);
+        yield return ShowStep("2", beepClip2);
+        yield return ShowStep("1", beepClip1);
+        yield return ShowStep("START!!", startClip);
 
         if (countdownText != null)
             countdownText.gameObject.SetActive(false);
     }
 
-    private IEnumerator ShowStep(string text, bool isStart)
+    private IEnumerator ShowStep(string text, AudioClip clip)
     {
         if (countdownText != null)
             countdownText.text = text;
 
-        // 효과음 (나중에 넣어도 됨)
-        if (sfxSource != null)
-        {
-            if (isStart && startClip != null)
-            {
-                sfxSource.PlayOneShot(startClip);
-            }
-            else if (!isStart && beepClip != null)
-            {
-                sfxSource.PlayOneShot(beepClip);
-            }
-        }
+        if (sfxSource != null && clip != null)
+            sfxSource.PlayOneShot(clip);
 
-        yield return new WaitForSeconds(interval);
+        yield return new WaitForSeconds(interval);   // 1초
     }
 
     /// <summary>

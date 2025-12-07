@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
     [Header("Control")]
     public bool canMove = true;
 
+    [Header("SFX")]
+    public AudioSource audioSource;
+    public AudioClip jumpClip;
+
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     public float rotationSpeed = 5f;
@@ -18,6 +22,9 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -77,9 +84,22 @@ public class PlayerController : MonoBehaviour
         // ????
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
+            Jump();
+
         }
+    }
+    void Jump()
+    {
+        if (!isGrounded) return;
+
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        if (audioSource != null && jumpClip != null)
+        {
+            audioSource.PlayOneShot(jumpClip);
+        }
+
+        isGrounded = false;
     }
 
     // ???? ???? (?????????? ?????? ?????? ???? ???? ????)
