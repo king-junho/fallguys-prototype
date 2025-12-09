@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 7f;
     public float rotationSpeed = 5f;
 
+    public float rotationSmoothTime = 0.1f;  // 회전 부드러움 정도
+    private float rotationVelocity;          // SmoothDamp 내부 상태용
+
     private Rigidbody rb;
     private bool isGrounded = true;
 
@@ -69,16 +72,23 @@ public class PlayerController : MonoBehaviour
         Vector3 velocity = new Vector3(moveDir.x * moveSpeed, rb.velocity.y, moveDir.z * moveSpeed);
         rb.velocity = velocity;
 
-        // ???? ????????
         if (moveDir.sqrMagnitude > 0.001f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+            // 목표 방향의 Y 각도(앞 방향)
+            float targetYaw = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
 
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                targetRotation,
-                rotationSpeed * Time.deltaTime
+            // 현재 플레이어의 Y 각도
+            float currentYaw = transform.eulerAngles.y;
+
+            // 부드럽게 각도 보간
+            float newYaw = Mathf.SmoothDampAngle(
+                currentYaw,
+                targetYaw,
+                ref rotationVelocity,
+                rotationSmoothTime
             );
+
+            transform.rotation = Quaternion.Euler(0f, newYaw, 0f);
         }
 
         // ????

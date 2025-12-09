@@ -9,9 +9,10 @@ public class SpikePlatform : MonoBehaviour
     [Range(0f, 1f)]
     public float activeThreshold = 0.6f; // 이 값 이상일 때 '가시 튀어나온 상태'
 
-    [Header("Knockback")]
-    public float knockbackForce = 8f;  // 옆으로 밀어내는 힘
-    public float knockupForce = 4f;    // 위로 튀기는 힘
+    // Knockback 대신 리스폰만 쓸 거라면 이 부분은 안 써도 됨
+    // [Header("Knockback")]
+    // public float knockbackForce = 8f;
+    // public float knockupForce = 4f;
 
     private Vector3 _startLocalPos;
     private float _timeOffset;
@@ -43,28 +44,16 @@ public class SpikePlatform : MonoBehaviour
     }
 
     // Spike 콜라이더는 IsTrigger = true 여야 함!
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!_isActive) return;                  // 가시가 내려가 있으면 무시
         if (!other.CompareTag("Player")) return; // Player 태그인지 확인
 
-        Rigidbody rb = other.attachedRigidbody;
-        if (rb == null) return;
-
-        // 수평 방향 계산
-        Vector3 dir = other.transform.position - transform.position;
-        dir.y = 0f;
-
-        if (dir.sqrMagnitude < 0.001f)
+        // PlayerController 찾아서 Respawn 호출
+        var controller = other.GetComponentInParent<PlayerController>();
+        if (controller != null)
         {
-            // 거의 같은 위치면 대충 앞으로 밀기
-            dir = transform.forward;
+            controller.Respawn();
         }
-
-        dir.Normalize();
-
-        // 옆으로 + 위로 튕겨내는 힘
-        Vector3 force = dir * knockbackForce + Vector3.up * knockupForce;
-        rb.AddForce(force, ForceMode.Impulse);
     }
 }
