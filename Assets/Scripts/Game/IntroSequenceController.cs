@@ -1,49 +1,59 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Playables;   // Timeline
-using TMPro;                  // Countdown UI
+using UnityEngine.Playables;   // Timeline 제어
+using TMPro;
 
 public class IntroSequenceController : MonoBehaviour
 {
     [Header("Timeline")]
-    public PlayableDirector introDirector;   // Timeline 오브젝트
+    public PlayableDirector introDirector;   // Timeline이 달린 오브젝트 (Timeline)
+
+    [Header("Timeline Camera")]
+    public Camera introCamera;              // 🔹 타임라인용 카메라
 
     [Header("Gameplay Objects")]
-    public GameObject player;                // Player 오브젝트
-    public PlayerController playerController; // PlayerController 스크립트
-    public Camera mainCamera;                // 3인칭 카메라
-    public MonoBehaviour cameraController;   // CameraController 스크립트
+    public GameObject player;               // Player 오브젝트
+    public MonoBehaviour playerController;  // PlayerController 스크립트
+    public Camera mainCamera;               // Main Camera (3인칭 카메라)
+    public MonoBehaviour cameraController;  // CameraController 스크립트
 
-    [Header("Countdown UI")]
-    public TextMeshProUGUI countdownText;    // 3,2,1, START!! 텍스트
-    public float interval = 1f;              // 숫자 간 간격(초)
+    [Header("BGM")]
+    public AudioSource bgmSource;           // BGM 용 AudioSource (BGM_Audio)
+    public AudioClip introBgm;              // 타임라인 재생 중 나올 음악
+    public AudioClip mainBgm;               // 게임 플레이용 메인 BGM
 
-    [Header("Audio (선택 사항, 나중에 써도 됨)")]
-    public AudioSource sfxSource;            // 비프/스타트 효과음용
-    public AudioSource bgmSource;            // 게임 BGM
-    public AudioClip beepClip1;
-    public AudioClip beepClip2;
-    public AudioClip beepClip3;
-    public AudioClip startClip;              // START!!
+    [Header("Countdown UI & SFX")]
+    public TMP_Text countdownText;
+    public AudioSource sfxSource;           // 카운트다운 SFX용 AudioSource
+    public AudioClip count3Clip;            // "3" 소리
+    public AudioClip count2Clip;            // "2" 소리
+    public AudioClip count1Clip;            // "1" 소리
+    public AudioClip startClip;             // "START!!" 소리
+
+    [Tooltip("카운트다운 한 단계당 시간(초)")]
+    public float countdownInterval = 1f;
 
     private void Start()
     {
-        // 1) 인트로 시작 전: 게임플레이/카메라 비활성화
+        // 1) 인트로 시작 전: 게임플레이 비활성화
         if (player != null) player.SetActive(false);
-
-        if (playerController != null)
-        {
-            playerController.enabled = false;  // 스크립트 자체 비활성화
-            playerController.canMove = false;  // 혹시 모르니 플래그도 꺼두기
-        }
-
-        if (mainCamera != null) mainCamera.gameObject.SetActive(false);
+        if (playerController != null) playerController.enabled = false;
         if (cameraController != null) cameraController.enabled = false;
 
+        // 카운트다운 텍스트는 처음엔 숨겨두기
         if (countdownText != null)
             countdownText.gameObject.SetActive(false);
 
-        // 2) Timeline 재생 시작
+        // 2) 인트로 BGM 재생 (타임라인 동안 루프)
+        if (bgmSource != null && introBgm != null)
+        {
+            bgmSource.Stop();
+            bgmSource.clip = introBgm;
+            bgmSource.loop = true;
+            bgmSource.Play();
+        }
+
+        // 3) Timeline 재생 시작
         if (introDirector != null)
         {
             introDirector.stopped += OnIntroFinished;
@@ -51,91 +61,51 @@ public class IntroSequenceController : MonoBehaviour
         }
         else
         {
-            // Timeline이 없으면 바로 카운트다운 후 시작
-            StartCoroutine(StartSequenceWithoutIntro());
+            StartGameplay();
         }
     }
 
-    private void OnDestroy()
-    {
-        if (introDirector != null)
-        {
-            introDirector.stopped -= OnIntroFinished;
-        }
-    }
-
-    /// <summary>
-    /// 타임라인이 끝났을 때 호출
-    /// </summary>
     private void OnIntroFinished(PlayableDirector director)
     {
-        StartCoroutine(StartSequenceAfterIntro());
-    }
+        // 🔹 1) 타임라인용 카메라/오브젝트 끄기
+        if (introCamera != null)
+            introCamera.gameObject.SetActive(false);
 
-    /// <summary>
-    /// 타임라인이 있는 경우: 인트로 끝 → 카운트다운 → 게임 시작
-    /// </summary>
-    private IEnumerator StartSequenceAfterIntro()
-    {
-        // 인트로용 Timeline 오브젝트 비활성화 (타임라인 카메라 안 보이게)
         if (introDirector != null && introDirector.gameObject != null)
-        {
             introDirector.gameObject.SetActive(false);
-        }
 
-        // 3인칭 카메라/플레이어만 먼저 켜두고,
-        // 조작은 아직 막아둔 상태에서 카운트다운 시작
-        ActivateGameplayView();
+        // 🔹 2) 3인칭 카메라 시점으로 전환
+        if (player != null)
+            player.SetActive(true);
+        if (mainCamera != null)
+            mainCamera.gameObject.SetActive(true);
+        if (cameraController != null)
+            cameraController.enabled = true;
 
-        // 카운트다운 + START 처리
-        yield return StartCoroutine(CountdownRoutine());
-
-        // 카운트다운 후 조작 허용 + BGM 재생
-        EnablePlayerControlAndBgm();
-    }
-
-    /// <summary>
-    /// 타임라인이 없는 경우에도 재사용 가능
-    /// </summary>
-    private IEnumerator StartSequenceWithoutIntro()
-    {
-        ActivateGameplayView();
-        yield return StartCoroutine(CountdownRoutine());
-        EnablePlayerControlAndBgm();
-    }
-
-    /// <summary>
-    /// 3인칭 시점으로 전환 (플레이어/카메라 보이게)
-    /// </summary>
-    private void ActivateGameplayView()
-    {
-        if (player != null) player.SetActive(true);
-
-        if (playerController != null)
+        // 🔹 3) 인트로 BGM 종료
+        if (bgmSource != null && bgmSource.isPlaying)
         {
-            playerController.enabled = true;   // 스크립트 켜기
-            playerController.canMove = false;  // 아직 조작은 막기
+            bgmSource.Stop();
         }
 
-        if (mainCamera != null) mainCamera.gameObject.SetActive(true);
-        if (cameraController != null) cameraController.enabled = true;
+        // 🔹 4) 이제 3인칭 관점에서 카운트다운 시작
+        StartCoroutine(CountdownRoutine());
     }
 
-    /// <summary>
-    /// 카운트다운 3,2,1, START!!
-    /// </summary>
     private IEnumerator CountdownRoutine()
     {
         if (countdownText != null)
             countdownText.gameObject.SetActive(true);
 
-        yield return ShowStep("3", beepClip3);
-        yield return ShowStep("2", beepClip2);
-        yield return ShowStep("1", beepClip1);
+        yield return ShowStep("3", count3Clip);
+        yield return ShowStep("2", count2Clip);
+        yield return ShowStep("1", count1Clip);
         yield return ShowStep("START!!", startClip);
 
         if (countdownText != null)
             countdownText.gameObject.SetActive(false);
+
+        StartGameplay();
     }
 
     private IEnumerator ShowStep(string text, AudioClip clip)
@@ -146,21 +116,20 @@ public class IntroSequenceController : MonoBehaviour
         if (sfxSource != null && clip != null)
             sfxSource.PlayOneShot(clip);
 
-        yield return new WaitForSeconds(interval);   // 1초
+        yield return new WaitForSeconds(countdownInterval);
     }
 
-    /// <summary>
-    /// 카운트다운 후 실제로 플레이 조작 허용 + BGM 재생
-    /// </summary>
-    private void EnablePlayerControlAndBgm()
+    private void StartGameplay()
     {
         if (playerController != null)
-        {
-            playerController.canMove = true;
-        }
+            playerController.enabled = true;
 
-        if (bgmSource != null && !bgmSource.isPlaying)
+        // 메인 BGM으로 전환
+        if (bgmSource != null && mainBgm != null)
         {
+            bgmSource.Stop();
+            bgmSource.clip = mainBgm;
+            bgmSource.loop = true;
             bgmSource.Play();
         }
     }

@@ -2318,120 +2318,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683189616}
   m_Mesh: {fileID: -4685099658920931431, guid: f184ba4911fbaaa4195a4f967a69e3bf, type: 3}
---- !u!1 &693447889
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 693447893}
-  - component: {fileID: 693447892}
-  - component: {fileID: 693447891}
-  - component: {fileID: 693447890}
-  m_Layer: 0
-  m_Name: Camera6
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!95 &693447890
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693447889}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!81 &693447891
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693447889}
-  m_Enabled: 0
---- !u!20 &693447892
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693447889}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 30
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &693447893
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693447889}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.101819046, y: 0.58949476, z: -0.075235106, w: 0.79778975}
-  m_LocalPosition: {x: -97.240074, y: 12.597321, z: -19.80363}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2069810817}
-  m_LocalEulerAnglesHint: {x: 359.8537, y: -0.0001356686, z: 0.00003536673}
 --- !u!1 &720100410
 GameObject:
   m_ObjectHideFlags: 0
@@ -2566,6 +2452,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &739128861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 62f2f7da0f47b4eca8ed1e5e5f2e412c, type: 3}
+  m_PrefabInstance: {fileID: 1726003407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &743321461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2893,6 +2784,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 62f2f7da0f47b4eca8ed1e5e5f2e412c, type: 3}
   m_PrefabInstance: {fileID: 1726003407}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &806045227
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739128861}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 62f2f7da0f47b4eca8ed1e5e5f2e412c, type: 3}
+  m_Controller: {fileID: 9100000, guid: 68529a38ce4d04e4db5051a62a171ae9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &806052344
 GameObject:
   m_ObjectHideFlags: 0
@@ -5529,7 +5441,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 62f2f7da0f47b4eca8ed1e5e5f2e412c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 806045227}
   m_SourcePrefab: {fileID: 100100000, guid: 62f2f7da0f47b4eca8ed1e5e5f2e412c, type: 3}
 --- !u!64 &1765750895
 MeshCollider:
@@ -5834,10 +5749,10 @@ PlayableDirector:
     value: {fileID: 336935169}
   - key: {fileID: 5335584828457266885, guid: 66c119e7045751a4b925a4c0a1233bec, type: 2}
     value: {fileID: 336935170}
-  - key: {fileID: -8226836603998004083, guid: 66c119e7045751a4b925a4c0a1233bec, type: 2}
-    value: {fileID: 693447889}
-  - key: {fileID: 2053656950772837535, guid: 66c119e7045751a4b925a4c0a1233bec, type: 2}
-    value: {fileID: 693447890}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
   - key: {fileID: 4613964526404073171, guid: 66c119e7045751a4b925a4c0a1233bec, type: 2}
     value: {fileID: 0}
   - key: {fileID: -4289169844063014867, guid: 66c119e7045751a4b925a4c0a1233bec, type: 2}
@@ -5863,7 +5778,6 @@ Transform:
   - {fileID: 2109762054}
   - {fileID: 422912206}
   - {fileID: 336935173}
-  - {fileID: 693447893}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2074086867
